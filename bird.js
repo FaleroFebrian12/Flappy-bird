@@ -1,11 +1,16 @@
+const burung = new Image();
+burung.src = "image/flappybird.gif";
+
 class Bird {
   // Gunakan PascalCase untuk nama class
   constructor() {
     this.x = 150;
     this.y = 200;
     this.vy = 0;
-    this.width = 20;
-    this.height = 20;
+    this.originwidth = 735;
+    this.originheight = 739;
+    this.width = this.originwidth / 20;
+    this.height = this.originheight / 20;
     this.weight = 1;
   }
 
@@ -30,7 +35,18 @@ class Bird {
 
   draw() {
     ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    // ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(
+      burung,
+      0,
+      0,
+      this.originwidth,
+      this.originheight,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 
   flap() {
