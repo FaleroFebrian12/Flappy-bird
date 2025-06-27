@@ -43,7 +43,7 @@ window.addEventListener("mouseup", (e) => {
   spacePressed = false;
 });
 
-// Tambahkan ini setelah event mouse/keyboard
+
 window.addEventListener("touchstart", (e) => {
   e.preventDefault();
   spacePressed = true;
