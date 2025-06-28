@@ -8,7 +8,7 @@ class Bird {
     this.y = 200;
     this.vy = 0;
     this.originwidth = 735;
-    this.originheight = 739;
+    this.originheight = 275;
     this.width = this.originwidth / 20;
     this.height = this.originheight / 20;
     this.weight = 1;

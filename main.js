@@ -1,6 +1,6 @@
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
-canvas.width = 600;
+canvas.width = 1000;
 canvas.height = 400;
 
 // dekralasikan variabel yang dibutuhkan
@@ -19,6 +19,8 @@ function animate() {
   handleObstacles();
   bird.update();
   bird.draw();
+  handlecollision();
+  if (handlecollision()) return;
   requestAnimationFrame(animate);
   frame++;
 }
@@ -43,7 +45,6 @@ window.addEventListener("mouseup", (e) => {
   spacePressed = false;
 });
 
-
 window.addEventListener("touchstart", (e) => {
   e.preventDefault();
   spacePressed = true;
@@ -53,3 +54,34 @@ window.addEventListener("touchend", (e) => {
   e.preventDefault();
   spacePressed = false;
 });
+
+const duar = new Image();
+duar.src = "image/—Pngtree—game end game over_655563.png";
+
+function handlecollision() {
+  for (let i = 0; i < ObstaclesArray.length; i++) {
+    if (
+      bird.x < ObstaclesArray[i].x + ObstaclesArray[i].width &&
+      bird.x + bird.width > ObstaclesArray[i].x &&
+      ((bird.y < 0 + ObstaclesArray[i].top && bird.y + bird.height > 0) ||
+        (bird.y > canvas.height - ObstaclesArray[i].bottom &&
+          bird.y + bird.height < canvas.height))
+    ) {
+      // collision detected
+      ctx.drawImage(duar, bird.x, bird.y, 50, 50);
+      ctx.font = "25px georgia";
+      ctx.fillStyle = "black";
+
+      // Panggil hadiah() dan dapatkan pesannya
+      const pesanHadiah =
+        score > 100
+          ? `Selamat ${nama}, Anda mendapatkan hadiah ucapan trimakasih, awokawok :) Skor: ${score}`
+          : `mohon maaf ${nama} skor anda dibawah 100 yaitu adalah: ${score}`;
+
+      ctx.fillText(pesanHadiah, 160, canvas.height / 2 - 10);
+      return true;
+    }
+  }
+}
+
+let nama = prompt("Sebutkan nama Anda terlebih dahulu");
