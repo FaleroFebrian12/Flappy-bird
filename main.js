@@ -19,6 +19,10 @@ function animate() {
   handleObstacles();
   bird.update();
   bird.draw();
+  ctx.fillStyle = "blue";
+  ctx.font = "90px Georgia";
+  ctx.strokeText(score, 450, 70);
+  ctx.fillText(score, 450, 70);
   handlecollision();
   if (handlecollision()) return;
   requestAnimationFrame(animate);
