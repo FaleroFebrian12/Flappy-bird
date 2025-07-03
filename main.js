@@ -12,10 +12,35 @@ let frame = 0;
 let score = 0;
 let gameSpeed = 2;
 
+// background
+const background1 = new Image();
+background1.src = "image/bg.jpg";
+
+const background2 = new Image();
+background2.src = "image/bg.jpg";
+
+const BG = {
+  x1: 0,
+  x2: canvas.width,
+  y: 0,
+  width: canvas.width,
+  height: canvas.height,
+};
+
+function handleBackground() {
+  if (BG.x1 <= -BG.width + gameSpeed) BG.x1 = BG.width;
+  else BG.x1 -= gameSpeed;
+  if (BG.x1 <= -BG.width + gameSpeed) BG.x2 = BG.width;
+  else BG.x2 -= gameSpeed;
+
+  ctx.drawImage(background1, BG.x1, BG.y, BG.width, BG.height);
+  ctx.drawImage(background2, BG.x2, BG.y, BG.width, BG.height);
+}
 // membuat function yang akan memanggil semua function
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // ctx.fillRect(10, canvas.height - 90, 50, 50);
+  handleBackground();
   handleObstacles();
   bird.update();
   bird.draw();
